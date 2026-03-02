@@ -11,7 +11,7 @@ Small, educational security projects for learning Python and security concepts.
 ### 1. Password Strength Checker
 **File:** `password_strength_checker.py`
 
-A password strength checker that goes beyond "has uppercase." Most password meters are security theater—this one actually checks what matters.
+A password strength checker that goes beyond "has uppercase." Most password meters are security theater: this one actually checks what matters.
 
 **Features:**
 - Entropy calculation (not just character type counting)
@@ -70,7 +70,7 @@ You had me at SYN.
 ### 3. Port Scanner
 **File:** `port_scanner.py`
 
-A basic port scanner in under 50 lines of core logic. The goal isn't to replace nmap—it's to understand what's actually happening when you scan.
+A basic port scanner in under 50 lines of core logic. The goal is not to replace nmap; it is to understand what is actually happening when you scan.
 
 **Features:**
 - TCP connect scanning
@@ -147,6 +147,69 @@ BRUTE FORCE TIME ESTIMATES (at 1M hashes/sec):
 
 ---
 
+### 5. Log Parser
+**File:** `log_parser.py`
+
+An auth log parser that detects brute force login attempts using rolling window analysis. Reads auth.log/syslog files, extracts failed authentication events, groups by source IP, and flags attack patterns.
+
+**Features:**
+- Parses sshd, su, and sudo failure patterns via regex
+- Groups failed attempts by source IP
+- Sliding window brute force detection (configurable threshold and window)
+- Demo mode with realistic synthetic log data (RFC 5737/6890 IPs)
+- ANSI color alerts for brute force flagging
+
+**Usage:**
+```bash
+python log_parser.py --demo
+python log_parser.py /var/log/auth.log
+python log_parser.py --demo --threshold 3
+python log_parser.py /var/log/auth.log --window 1800
+```
+
+**Sample output:**
+```
+==================================================
+AUTH LOG PARSER: BRUTE FORCE DETECTOR
+Waypoint Compliance Advisory
+==================================================
+
+Total failed attempts: 19
+Unique source IPs: 4
+Detection window: 600s | Threshold: 5 failures
+
+--------------------------------------------------
+FAILED ATTEMPTS BY SOURCE IP
+--------------------------------------------------
+
+  198.51.100.47: 9 attempts  [BRUTE FORCE]
+    Mar 01 10:05:12  sshd   user=root
+    Mar 01 10:11:44  sshd   user=admin
+    Mar 01 10:18:03  sshd   user=deploy
+    ... and 6 more
+
+  203.0.113.88: 6 attempts
+    Mar 01 10:00:22  sshd   user=ubuntu
+    Mar 01 10:35:18  sshd   user=root
+    Mar 01 11:10:41  sshd   user=postgres
+    ... and 3 more
+
+--------------------------------------------------
+BRUTE FORCE ALERTS
+--------------------------------------------------
+  198.51.100.47: 9 failures within 600s window
+
+==================================================
+```
+
+**What you'll learn:**
+- How auth log parsing works for incident detection
+- Why rolling window analysis catches patterns that simple counting misses
+- How brute force attacks look in real log data
+- The importance of log monitoring as a security control
+
+---
+
 ## Requirements
 
 All projects use **Python 3.8+** and **standard library only** (no pip install needed).
@@ -173,7 +236,7 @@ MIT License - Use freely, learn something, build something better.
 
 ## About
 
-These projects accompany my LinkedIn posts on practical security topics. The goal is education—understanding how things work makes you better at defending against them.
+These projects accompany my LinkedIn posts on practical security topics. The goal is education: understanding how things work makes you better at defending against them.
 
 **Cameron Hopkin**  
 Security Engineering Manager | CISSP, CEH, CHFI  

@@ -184,7 +184,7 @@ def estimate_crack_time(charset_size: int, length: int, rate: float = 1000000) -
         return f"{seconds/31536000:.2e} years"
 
 
-def main():
+def main() -> None:
     """Main entry point."""
     print("\n" + "=" * 55)
     print("SIMPLE HASH CRACKER")

@@ -4,7 +4,7 @@ Simple Port Scanner
 Waypoint Compliance Advisory - waypointca.com
 
 A basic port scanner in under 50 lines of core logic.
-The goal isn't to replace nmap—it's to understand what's happening.
+The goal is not to replace nmap; it is to understand what is happening.
 
 Prerequisites:
     None - uses Python standard library only
@@ -101,7 +101,7 @@ def resolve_host(host: str) -> str:
         return None
 
 
-def main():
+def main() -> None:
     """Main entry point."""
     print("\n" + "=" * 50)
     print("SIMPLE PORT SCANNER")

@@ -427,7 +427,7 @@ def print_results(results: Dict) -> None:
     print("\n" + "=" * 50)
 
 
-def interactive_mode():
+def interactive_mode() -> None:
     """Run interactive password checker."""
     print("\n" + "=" * 50)
     print("PASSWORD STRENGTH CHECKER")

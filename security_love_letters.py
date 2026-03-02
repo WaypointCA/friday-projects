@@ -320,7 +320,7 @@ def load_logs_from_file(filepath: str) -> List[str]:
         return SAMPLE_LOGS
 
 
-def main():
+def main() -> None:
     """Interactive love letter generator."""
     import sys
     
